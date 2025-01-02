@@ -1,21 +1,19 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { loginValidation } from "../validation/loginValidation";
+import { forgetPasswordSchema } from "../validation/forgetPasswordSchema";
 
-export function useLogin() {
+export function useForgetPassword() {
     const [showErrorToast, setShowErrorToast] = useState(false);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [title, setTitle] = useState<string>("")
     const [body, setBody] = useState<string>("")
-    const [data, setData] = useState<{ email: string, password: string }>({
+    const [data, setData] = useState<{ email: string, }>({
         email: "",
-        password: ""
     })
     const navigate = useNavigate();
-    const [error, setErrors] = useState<{ email: string, password: string }>({
+    const [error, setErrors] = useState<{ email: string,}>({
         email: "",
-        password: ""
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,12 +26,12 @@ export function useLogin() {
     const handleSubmit = async () => {
         setErrors({
             email: "",
-            password: "",
         });
         try {
-            await loginValidation.validate(data, { abortEarly: false });
-            setTitle("Log in successfully")
-            setBody("Welcome Back")
+            await forgetPasswordSchema.validate(data, { abortEarly: false });
+            setTitle("EMail sent successfully")
+            setBody("Check your email")
+            navigate('/email-verification')
             setShowSuccessToast(true)
         }
         catch (error: unknown) {
@@ -55,6 +53,7 @@ export function useLogin() {
             }
         }
     };
+
     return {
         data,
         handleChange,

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    font-size: 100%; /* Default 16px */
+  }
 .toast-error-bg{
     background: rgb(242,191,189);
 background: linear-gradient(90deg, rgba(242,191,189,1) 0%, rgba(255,255,255,1) 25%, rgba(252,252,252,1) 100%);
